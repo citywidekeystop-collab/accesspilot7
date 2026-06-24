@@ -7,15 +7,22 @@
 <style>
 :root{--navy:#061326;--cyan:#00d4ff;--blue:#2563eb;--green:#16a34a;--purple:#6d28d9;--orange:#f97316;--red:#ef4444;--text:#07152e;--muted:#64748b;--line:#dbe5f3}
 *{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{margin:0;color:var(--text);background:url("brick-bg.jpg");background-size:cover;background-position:center;background-attachment:fixed}
-button,input,select{font:inherit}button{cursor:pointer}
-.mobileTop{display:none;background:#07152e;color:white;padding:14px 16px;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000}
-.mobileTop button{background:linear-gradient(135deg,var(--cyan),var(--blue));color:white;border:0;border-radius:12px;padding:8px 13px;font-size:22px}
-.sidebar{width:292px;height:100vh;position:fixed;top:0;left:0;z-index:999;overflow-y:auto;color:white;padding:24px 20px;background:linear-gradient(180deg,#07152e,#020617);box-shadow:18px 0 40px rgba(2,6,23,.25)}
-.brand{text-align:center;margin-bottom:24px}.brandLogo{width:190px;max-width:100%;display:block;margin:0 auto 8px;border-radius:12px}.fallback{display:none;font-size:30px;font-weight:950}.fallback span{color:var(--cyan)}.tagline{color:#9fb3d9;font-size:11px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase}
-.nav{display:flex;align-items:center;gap:12px;padding:15px 16px;border-radius:15px;margin:7px 0;font-weight:900;cursor:pointer}
-.nav.active,.nav:hover{background:linear-gradient(135deg,#00d4ff,#2563eb);box-shadow:0 10px 28px rgba(37,99,235,.35)}
-.promo{margin-top:28px;padding:20px;border-radius:23px;background:linear-gradient(145deg,#084b8f,#1179ff);box-shadow:0 16px 35px rgba(0,0,0,.25)}
+body{
+margin:0;
+color:var(--text);
+
+background-image:
+linear-gradient(
+rgba(255,255,255,.80),
+rgba(255,255,255,.80)
+),
+url("brick-bg.jpg");
+
+background-repeat:repeat;
+background-size:180px auto;
+background-position:center;
+background-attachment:fixed;
+}
 .promo h3{margin:0 0 10px;font-size:20px}.promo p{margin:0 0 18px;color:#dbeafe;font-weight:700}
 .openButton{width:100%;height:76px;border:0;border-radius:18px;background:linear-gradient(135deg,#22c55e,#00a63e);color:white;font-size:31px;font-weight:950;box-shadow:0 0 26px rgba(34,197,94,.65),inset 0 0 0 2px rgba(255,255,255,.15)}
 .userBox{margin-top:28px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px;display:flex;align-items:center;gap:12px}
