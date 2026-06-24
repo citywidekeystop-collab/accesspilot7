@@ -7,7 +7,15 @@
 <style>
 :root{--navy:#07152e;--cyan:#00d4ff;--blue:#2563eb;--green:#22c55e;--purple:#7c3aed;--orange:#f59e0b;--red:#ef4444;--bg:#f5f9ff;--text:#0f172a;--muted:#64748b;--line:#e5eaf3}
 *{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{margin:0;background:var(--bg);color:var(--text)}
+body{
+margin:0;
+color:var(--text);
+background:
+linear-gradient(rgba(245,249,255,.84),rgba(245,249,255,.84)),
+url("brick-bg.jpg");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
 button,input,select{font:inherit}
 .mobileTop{display:none;background:#07152e;color:#fff;padding:14px 16px;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:999}
 .mobileTop button{background:var(--cyan);color:#fff;border:0;border-radius:12px;padding:8px 13px;font-size:22px}
