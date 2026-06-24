@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AccessPilot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
+body{margin:0;background:linear-gradient(135deg,#eef7ff,#ffffff,#f3e8ff);color:#0f172a;display:flex}
+aside{width:270px;min-height:100vh;background:white;padding:25px;border-right:1px solid #e5e7eb;box-shadow:10px 0 40px #dbeafe}
+.logo{font-size:32px;font-weight:900;color:#2563eb}
+.sub{color:#64748b;font-size:13px;margin-bottom:35px}
+nav div{padding:15px 18px;border-radius:16px;margin:8px 0;font-weight:700}
+nav div.active,nav div:hover{background:linear-gradient(135deg,#2563eb,#9333ea);color:white}
+main{flex:1;padding:28px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.search{width:430px;padding:16px;border-radius:18px;border:1px solid #dbeafe}
+.hero{background:linear-gradient(135deg,#2563eb,#7c3aed,#ec4899);color:white;padding:32px;border-radius:30px;margin-bottom:24px;box-shadow:0 25px 60px #c4b5fd}
+.hero h1{font-size:38px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px}
+.card{background:white;border-radius:24px;padding:24px;box-shadow:0 20px 45px #e0e7ff;border:1px solid #eef2ff}
+.num{font-size:38px;font-weight:900}
+.blue{color:#2563eb}.green{color:#16a34a}.purple{color:#9333ea}.orange{color:#f97316}
+.layout{display:grid;grid-template-columns:2fr 1.2fr;gap:22px}
+.property{display:grid;grid-template-columns:260px 1fr;gap:22px}
+.building{border-radius:24px;background:linear-gradient(135deg,#38bdf8,#a78bfa);height:260px;display:flex;align-items:center;justify-content:center;color:white;font-size:70px}
+button{border:0;border-radius:16px;padding:15px 20px;font-weight:800;cursor:pointer}
+.unlock{background:linear-gradient(135deg,#06b6d4,#2563eb,#9333ea);color:white;width:100%;margin-top:18px}
+table{width:100%;border-collapse:collapse}
+th,td{padding:14px;border-bottom:1px solid #e5e7eb;text-align:left}
+th{color:#2563eb}
+.pill{padding:6px 12px;border-radius:999px;font-size:12px;font-weight:800}
+.ok{background:#dcfce7;color:#15803d}
+.no{background:#fee2e2;color:#dc2626}
+.activity div{padding:15px;border-bottom:1px solid #e5e7eb}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+input{padding:14px;border:1px solid #dbeafe;border-radius:14px;width:100%;margin-bottom:10px}
+@media(max-width:900px){body{display:block}aside{width:100%;min-height:auto}.grid,.layout,.property{grid-template-columns:1fr}.search{width:100%}}
+</style>
+</head>
+<body>
+
+<aside>
+<div class="logo">AccessPilot</div>
+<div class="sub">Cloud Access Control</div>
+<nav>
+<div class="active">🏠 Dashboard</div>
+<div>🏢 Properties</div>
+<div>👥 Residents</div>
+<div>🔑 Fobs</div>
+<div>🚪 Doors</div>
+<div>📋 Activity Logs</div>
+<div>⚙️ Settings</div>
+</nav>
+</aside>
+
+<main>
+<header>
+<input class="search" placeholder="Search resident, apartment, fob ID...">
+<strong>Constantine • Admin</strong>
+</header>
+
+<section class="hero">
+<h1>Welcome back, Constantine 👋</h1>
+<p>Track every resident, every fob, every door entry — live from the cloud.</p>
+</section>
+
+<section class="grid">
+<div class="card"><p>Total Properties</p><div class="num blue">1</div></div>
+<div class="card"><p>Residents</p><div class="num green">386</div></div>
+<div class="card"><p>Fobs Issued</p><div class="num purple">400</div></div>
+<div class="card"><p>Doors Online</p><div class="num orange">1/1</div></div>
+</section>
+
+<section class="layout">
+<div>
+<div class="card property">
+<div class="building">🏢</div>
+<div>
+<h2>Greenfield Apartments ✅</h2>
+<p>Front Entrance • Online</p>
+<p>Last check-in: 30 seconds ago</p>
+<button class="unlock" onclick="remoteUnlock()">🔓 Remote Unlock</button>
+</div>
+</div>
+
+<div class="card" style="margin-top:22px">
+<h2>Add / Assign Resident Fob</h2>
+<input id="name" placeholder="Resident name">
+<input id="apt" placeholder="Apartment number">
+<input id="fob" placeholder="Scan or enter Fob ID">
+<button class="unlock" onclick="addResident()">Add Resident + Assign Fob</button>
+</div>
+
+<div class="card" style="margin-top:22px">
+<h2>Resident Fob List</h2>
+<table id="residentTable">
+<tr><th>Name</th><th>Apt</th><th>Fob ID</th><th>Status</th><th>Action</th></tr>
+</table>
+</div>
+</div>
+
+<div>
+<div class="card">
+<h2>Recent Activity</h2>
+<div class="activity" id="activity"></div>
+</div>
+
+<div class="card" style="margin-top:22px">
+<h2>Quick Actions</h2>
+<div class="quick">
+<button>Add Resident</button>
+<button>Issue Fob</button>
+<button>View Logs</button>
+<button>Reports</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<script>
+let residents=[
+{name:"John Smith",apt:"204",fob:"MF4K-A82F19",status:"Active"},
+{name:"Maria Garcia",apt:"305",fob:"MF4K-B77C91",status:"Active"},
+{name:"David Lee",apt:"101",fob:"MF4K-C13D55",status:"Active"}
+];
+
+let logs=[
+"John Smith • Apt 204 • Front Entrance • Granted • 2 min ago",
+"Maria Garcia • Apt 305 • Front Entrance • Granted • 28 min ago",
+"Unknown Fob • Front Entrance • Denied • 41 min ago",
+"Manager Remote Unlock • Front Entrance • Unlocked • 1 hr ago"
+];
+
+function render(){
+let table=document.getElementById("residentTable");
+table.innerHTML="<tr><th>Name</th><th>Apt</th><th>Fob ID</th><th>Status</th><th>Action</th></tr>";
+residents.forEach((r,i)=>{
+table.innerHTML+=`
+<tr>
+<td>${r.name}</td>
+<td>${r.apt}</td>
+<td>${r.fob}</td>
+<td><span class="pill ${r.status==='Active'?'ok':'no'}">${r.status}</span></td>
+<td><button onclick="disableFob(${i})">Disable</button></td>
+</tr>`;
+});
+
+document.getElementById("activity").innerHTML=logs.map(l=>`<div>🔑 ${l}</div>`).join("");
+}
+
+function addResident(){
+let name=document.getElementById("name").value;
+let apt=document.getElementById("apt").value;
+let fob=document.getElementById("fob").value;
+if(!name||!apt||!fob)return alert("Enter name, apartment, and fob ID");
+residents.push({name,apt,fob,status:"Active"});
+logs.unshift(`${name} • Apt ${apt} • Fob Assigned • ${fob}`);
+render();
+}
+
+function disableFob(i){
+residents[i].status="Disabled";
+logs.unshift(`${residents[i].name} • Apt ${residents[i].apt} • Fob Disabled`);
+render();
+}
+
+function remoteUnlock(){
+logs.unshift("Admin • Front Entrance • Remote Unlock Sent • Just now");
+alert("Door unlock command sent.");
+render();
+}
+
+render();
+</script>
+
+</body>
+</html>
