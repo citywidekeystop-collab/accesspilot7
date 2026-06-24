@@ -1,345 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AccessPilot Cloud</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AccessPilot 1-Door</title>
 
 <style>
 :root{
---navy:#07132A;
---teal:#00D6C4;
---blue:#2563EB;
---green:#16C45B;
---purple:#7C4DFF;
---orange:#FF7A00;
---red:#EF4444;
---bg:#F5F9FF;
---card:#FFFFFF;
---text:#0F172A;
---muted:#64748B;
---line:#E5EAF3;
+--navy:#07132A;--teal:#00D6C4;--blue:#2563EB;--green:#16C45B;
+--purple:#7C4DFF;--orange:#FF7A00;--red:#EF4444;
+--bg:#F5F9FF;--card:#fff;--text:#0F172A;--muted:#64748B;--line:#E5EAF3;
 }
-
 *{box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-
-body{
-margin:0;
-background:var(--bg);
-color:var(--text);
-display:flex;
-}
-
-/* SIDEBAR */
-.sidebar{
-width:280px;
-min-height:100vh;
-background:linear-gradient(180deg,var(--navy),#020617);
-color:white;
-padding:24px;
-position:fixed;
-left:0;
-top:0;
-}
-
-.logo{
-font-size:31px;
-font-weight:900;
-margin-bottom:4px;
-}
-
-.logo span{color:var(--teal)}
-
-.sub{
-font-size:12px;
-color:#9fb3d9;
-margin-bottom:35px;
-}
-
-.nav{
-padding:15px;
-border-radius:15px;
-margin:8px 0;
-font-weight:800;
-}
-
-.nav.active,.nav:hover{
-background:linear-gradient(135deg,var(--teal),var(--blue));
-cursor:pointer;
-}
-
-.promo{
-margin-top:30px;
-background:linear-gradient(135deg,#06b6d4,#2563eb);
-padding:22px;
-border-radius:24px;
-}
-
-.promo button{
-background:white;
-color:var(--blue);
-width:100%;
-border:0;
-border-radius:14px;
-padding:14px;
-font-weight:900;
-}
-
-/* MAIN */
-.main{
-margin-left:280px;
-width:calc(100% - 280px);
-padding:28px;
-}
-
-.top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:25px;
-}
-
-.search{
-width:500px;
-padding:16px;
-border:1px solid var(--line);
-border-radius:18px;
-background:white;
-}
-
-.hero{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:22px;
-}
-
-.hero h1{
-font-size:38px;
-margin:0;
-}
-
-.hero span{color:var(--teal)}
-
-.date{
-background:white;
-padding:14px 18px;
-border-radius:16px;
-border:1px solid var(--line);
-font-weight:900;
-}
-
-/* STATS */
-.stats{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:16px;
-margin-bottom:22px;
-}
-
-.card{
-background:white;
-border:1px solid var(--line);
-border-radius:24px;
-padding:22px;
-box-shadow:0 18px 45px rgba(15,23,42,.08);
-}
-
-.stat{
-display:flex;
-gap:14px;
-align-items:center;
-}
-
-.icon{
-width:55px;
-height:55px;
-border-radius:18px;
-display:flex;
-align-items:center;
-justify-content:center;
-color:white;
-font-size:25px;
-}
-
-.bg-green{background:var(--green)}
-.bg-blue{background:var(--blue)}
-.bg-purple{background:var(--purple)}
-.bg-orange{background:var(--orange)}
-.bg-teal{background:var(--teal)}
-
-.stat h2{
-font-size:32px;
-margin:0;
-}
-
-.stat p{
-margin:3px 0;
-color:var(--muted);
-}
-
-/* LAYOUT */
-.grid{
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:22px;
-}
-
-.property{
-display:grid;
-grid-template-columns:280px 1fr;
-gap:22px;
-}
-
-.photo{
-height:280px;
-border-radius:22px;
-background:
-linear-gradient(135deg,rgba(0,214,196,.25),rgba(37,99,235,.35)),
-url("https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=80");
-background-size:cover;
-background-position:center;
-position:relative;
-}
-
-.online{
-position:absolute;
-top:15px;
-left:15px;
-background:var(--green);
-color:white;
-padding:8px 13px;
-border-radius:999px;
-font-weight:900;
-font-size:12px;
-}
-
-.status{
-border:1px solid var(--line);
-border-radius:18px;
-padding:16px;
-margin:16px 0;
-display:flex;
-justify-content:space-between;
-}
-
-.primary{
-background:linear-gradient(135deg,var(--green),#059669);
-color:white;
-border:0;
-border-radius:15px;
-padding:16px;
-font-weight:900;
-width:100%;
-cursor:pointer;
-}
-
-.small{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin-top:14px;
-}
-
-.small div{
-text-align:center;
-background:#f8fafc;
-border:1px solid var(--line);
-border-radius:15px;
-padding:12px;
-font-weight:800;
-}
-
-/* FORM */
-.form{
-display:grid;
-grid-template-columns:1fr 1fr 1fr 1fr auto;
-gap:10px;
-}
-
-input{
-padding:14px;
-border:1px solid var(--line);
-border-radius:14px;
-}
-
-/* TABLE */
-table{
-width:100%;
-border-collapse:collapse;
-}
-
-th,td{
-padding:14px;
-border-bottom:1px solid var(--line);
-text-align:left;
-}
-
-th{color:var(--blue)}
-
-.badge{
-padding:7px 11px;
-border-radius:999px;
-font-weight:900;
-font-size:12px;
-}
-
-.active{background:#dcfce7;color:#15803d}
-.disabled{background:#fee2e2;color:#dc2626}
-
-.danger{
-background:var(--red);
-color:white;
-border:0;
-border-radius:12px;
-padding:10px 14px;
-font-weight:800;
-}
-
-/* ACTIVITY */
-.activity{
-display:flex;
-gap:12px;
-padding:14px 0;
-border-bottom:1px solid var(--line);
-align-items:center;
-}
-
-.circle{
-width:42px;
-height:42px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:20px;
-background:#e0f2fe;
-}
-
-/* QUICK */
-.quick{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-}
-
-.quick button{
-border:0;
-border-radius:15px;
-padding:16px;
-color:white;
-font-weight:900;
-cursor:pointer;
-}
-
-/* MOBILE */
-@media(max-width:1000px){
-body{display:block}
-.sidebar{position:relative;width:100%;min-height:auto}
-.main{margin-left:0;width:100%}
-.stats,.grid,.property,.form{grid-template-columns:1fr}
-.search{width:100%}
-}
+body{margin:0;background:var(--bg);color:var(--text);display:flex}
+.sidebar{width:280px;min-height:100vh;background:linear-gradient(180deg,var(--navy),#020617);color:white;padding:24px;position:fixed}
+.logo{font-size:31px;font-weight:900}.logo span{color:var(--teal)}
+.sub{font-size:12px;color:#9fb3d9;margin-bottom:35px}
+.nav{padding:15px;border-radius:15px;margin:8px 0;font-weight:800;cursor:pointer}
+.nav.active,.nav:hover{background:linear-gradient(135deg,var(--teal),var(--blue))}
+.promo{margin-top:28px;background:linear-gradient(135deg,#06b6d4,#2563eb);padding:22px;border-radius:24px}
+.promo button{background:white;color:var(--blue);width:100%;border:0;border-radius:14px;padding:14px;font-weight:900}
+.main{margin-left:280px;width:calc(100% - 280px);padding:28px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.search{width:500px;padding:16px;border:1px solid var(--line);border-radius:18px;background:white}
+.hero{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.hero h1{font-size:38px;margin:0}.hero span{color:var(--teal)}
+.date{background:white;padding:14px 18px;border-radius:16px;border:1px solid var(--line);font-weight:900}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:22px}
+.card{background:white;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 18px 45px rgba(15,23,42,.08)}
+.stat{display:flex;gap:12px;align-items:center}
+.icon{width:50px;height:50px;border-radius:17px;display:flex;align-items:center;justify-content:center;color:white;font-size:23px}
+.bg-green{background:var(--green)}.bg-blue{background:var(--blue)}.bg-purple{background:var(--purple)}
+.bg-orange{background:var(--orange)}.bg-teal{background:var(--teal)}.bg-red{background:var(--red)}
+.stat h2{font-size:30px;margin:0}.stat p{margin:3px 0;color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:2fr 1fr;gap:22px}
+.property{display:grid;grid-template-columns:280px 1fr;gap:22px}
+.photo{height:280px;border-radius:22px;background:linear-gradient(135deg,rgba(0,214,196,.25),rgba(37,99,235,.35)),url("https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=80");background-size:cover;background-position:center;position:relative}
+.online{position:absolute;top:15px;left:15px;background:var(--green);color:white;padding:8px 13px;border-radius:999px;font-weight:900;font-size:12px}
+.status{border:1px solid var(--line);border-radius:18px;padding:16px;margin:16px 0;display:flex;justify-content:space-between}
+.primary{background:linear-gradient(135deg,var(--green),#059669);color:white;border:0;border-radius:15px;padding:16px;font-weight:900;width:100%;cursor:pointer}
+.small{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.small div{text-align:center;background:#f8fafc;border:1px solid var(--line);border-radius:15px;padding:12px;font-weight:800}
+.form{display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:10px}
+input,select{padding:14px;border:1px solid var(--line);border-radius:14px;background:white}
+table{width:100%;border-collapse:collapse}th,td{padding:14px;border-bottom:1px solid var(--line);text-align:left}th{color:var(--blue)}
+.badge{padding:7px 11px;border-radius:999px;font-weight:900;font-size:12px}
+.active{background:#dcfce7;color:#15803d}.disabled{background:#fee2e2;color:#dc2626}.denied{background:#fee2e2;color:#dc2626}
+.danger{background:var(--red);color:white;border:0;border-radius:12px;padding:10px 14px;font-weight:800}
+.activity{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);align-items:center}
+.circle{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;background:#e0f2fe}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.quick button{border:0;border-radius:15px;padding:16px;color:white;font-weight:900;cursor:pointer}
+.page{display:none}.page.activePage{display:block}
+.settingsGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.settingBox{background:#f8fafc;border:1px solid var(--line);border-radius:18px;padding:18px}
+.settingBox h3{margin-top:0;color:var(--blue)}
+@media(max-width:1000px){body{display:block}.sidebar{position:relative;width:100%;min-height:auto}.main{margin-left:0;width:100%}.stats,.grid,.property,.form,.settingsGrid{grid-template-columns:1fr}.search{width:100%}}
 </style>
 </head>
 
@@ -347,20 +63,19 @@ body{display:block}
 
 <aside class="sidebar">
 <div class="logo">Access<span>Pilot</span></div>
-<div class="sub">Cloud Access Control Platform</div>
+<div class="sub">1-Door Cloud Access Control</div>
 
-<div class="nav active">🏠 Dashboard</div>
-<div class="nav">🏢 Properties</div>
-<div class="nav">👥 Residents</div>
-<div class="nav">🔑 Fobs</div>
-<div class="nav">🚪 Doors</div>
-<div class="nav">📋 Activity Logs</div>
-<div class="nav">💳 Billing</div>
-<div class="nav">⚙️ Settings</div>
+<div class="nav active" onclick="showPage('dashboard',this)">🏠 Dashboard</div>
+<div class="nav" onclick="showPage('residents',this)">👥 Residents</div>
+<div class="nav" onclick="showPage('fobs',this)">🔑 Fobs</div>
+<div class="nav" onclick="showPage('logs',this)">📋 Activity Logs</div>
+<div class="nav" onclick="showPage('reports',this)">📊 Reports</div>
+<div class="nav" onclick="remoteUnlock()">🔓 Remote Unlock</div>
+<div class="nav" onclick="showPage('settings',this)">⚙️ Settings</div>
 
 <div class="promo">
 <h3>Remote Unlock</h3>
-<p>Unlock any connected door from anywhere.</p>
+<p>Unlock the front entrance from anywhere.</p>
 <button onclick="remoteUnlock()">Unlock Now 🔓</button>
 </div>
 </aside>
@@ -368,28 +83,29 @@ body{display:block}
 <main class="main">
 
 <div class="top">
-<input class="search" id="search" oninput="filterResidents()" placeholder="Search name, apartment, phone, fob ID..." />
-<strong>Constantine • Administrator</strong>
+<input class="search" id="search" oninput="filterResidents()" placeholder="Search name, apartment, phone, fob ID...">
+<strong>Admin • Manager</strong>
 </div>
 
-<section class="hero">
+<section id="dashboard" class="page activePage">
+<div class="hero">
 <div>
-<h1>Welcome back, <span>Constantine!</span> 👋</h1>
-<p>Track every resident, every fob, and every door entry.</p>
+<h1>Welcome back, <span>Manager!</span> 👋</h1>
+<p>Track every resident, every fob, and every front door entry.</p>
 </div>
-<div class="date">📅 June 23, 2026</div>
-</section>
+<div class="date">📅 Today</div>
+</div>
 
 <section class="stats">
-<div class="card stat"><div class="icon bg-green">🏢</div><div><p>Properties</p><h2>1</h2></div></div>
 <div class="card stat"><div class="icon bg-blue">👥</div><div><p>Residents</p><h2 id="count">386</h2></div></div>
-<div class="card stat"><div class="icon bg-purple">🔑</div><div><p>Fobs Issued</p><h2>400</h2></div></div>
-<div class="card stat"><div class="icon bg-orange">🚪</div><div><p>Doors Online</p><h2>1/1</h2></div></div>
-<div class="card stat"><div class="icon bg-teal">💰</div><div><p>MRR</p><h2>$49</h2></div></div>
+<div class="card stat"><div class="icon bg-purple">🔑</div><div><p>Active Fobs</p><h2>400</h2></div></div>
+<div class="card stat"><div class="icon bg-green">✅</div><div><p>Entries Today</p><h2>156</h2></div></div>
+<div class="card stat"><div class="icon bg-red">❌</div><div><p>Denied</p><h2>4</h2></div></div>
+<div class="card stat"><div class="icon bg-teal">🚪</div><div><p>Door Status</p><h2>Online</h2></div></div>
+<div class="card stat"><div class="icon bg-orange">🔓</div><div><p>Remote Unlocks</p><h2>12</h2></div></div>
 </section>
 
 <section class="grid">
-
 <div>
 <div class="card property">
 <div class="photo"><div class="online">● ONLINE</div></div>
@@ -397,12 +113,11 @@ body{display:block}
 <h2>Greenfield Apartments ✅</h2>
 <p>123 Greenfield Drive, New York, NY 10001</p>
 <div class="status"><b>🚪 Front Entrance</b><b style="color:var(--green)">Online</b></div>
-<button class="primary" onclick="remoteUnlock()">🔓 Remote Unlock</button>
-
+<button class="primary" onclick="remoteUnlock()">🔓 Remote Unlock Front Entrance</button>
 <div class="small">
 <div>Residents<br>386</div>
 <div>Fobs<br>400</div>
-<div>Doors<br>1/1</div>
+<div>Door<br>1</div>
 <div>Logs Today<br>156</div>
 </div>
 </div>
@@ -428,21 +143,61 @@ body{display:block}
 <div>
 <div class="card">
 <h2>Recent Activity</h2>
-<div id="logs"></div>
+<div id="logsBox"></div>
 </div>
 
 <div class="card" style="margin-top:22px">
 <h2>Quick Actions</h2>
 <div class="quick">
-<button class="bg-green">👤 Add Resident</button>
-<button class="bg-blue">🔑 Issue Fob</button>
+<button class="bg-green" onclick="showPageByName('residents')">👤 Add Resident</button>
+<button class="bg-blue" onclick="showPageByName('fobs')">🔑 Issue Fob</button>
 <button class="bg-orange" onclick="remoteUnlock()">🔓 Unlock</button>
-<button class="bg-purple">📋 View Logs</button>
+<button class="bg-purple" onclick="showPageByName('logs')">📋 View Logs</button>
 </div>
 </div>
 </div>
-
 </section>
+</section>
+
+<section id="residents" class="page">
+<div class="card"><h1>👥 Residents</h1><p>Manage all residents and assigned fobs.</p><table id="residentPageTable"></table></div>
+</section>
+
+<section id="fobs" class="page">
+<div class="card"><h1>🔑 Fobs</h1><p>Issue, disable, replace, and search fobs.</p><table id="fobTable"></table></div>
+</section>
+
+<section id="logs" class="page">
+<div class="card"><h1>📋 Activity Logs</h1><p>Access history, denied attempts, and remote unlock history.</p><div id="fullLogs"></div></div>
+</section>
+
+<section id="reports" class="page">
+<div class="card">
+<h1>📊 Reports</h1>
+<div class="stats">
+<div class="card stat"><div class="icon bg-green">✅</div><div><p>Daily Entries</p><h2>156</h2></div></div>
+<div class="card stat"><div class="icon bg-blue">📈</div><div><p>Weekly Entries</p><h2>842</h2></div></div>
+<div class="card stat"><div class="icon bg-red">❌</div><div><p>Denied This Week</p><h2>18</h2></div></div>
+<div class="card stat"><div class="icon bg-orange">🔓</div><div><p>Remote Unlocks</p><h2>12</h2></div></div>
+</div>
+</div>
+</section>
+
+<section id="settings" class="page">
+<div class="card">
+<h1>⚙️ Settings</h1>
+<div class="settingsGrid">
+<div class="settingBox"><h3>🏢 Property Information</h3><input value="Greenfield Apartments"><br><br><input value="123 Greenfield Drive"></div>
+<div class="settingBox"><h3>🚪 Door Settings</h3><select><option>Unlock Time: 3 seconds</option><option>5 seconds</option><option>10 seconds</option></select><br><br><select><option>Auto Relock: Enabled</option></select></div>
+<div class="settingBox"><h3>🔑 Fob Settings</h3><p>Max Fobs: 400</p><button class="primary">Export Fob List</button></div>
+<div class="settingBox"><h3>👤 User Accounts</h3><input value="manager@email.com"><br><br><button class="primary">Add Admin</button></div>
+<div class="settingBox"><h3>📱 Notifications</h3><label><input type="checkbox" checked> Denied Access Alerts</label><br><label><input type="checkbox" checked> Offline Door Alerts</label></div>
+<div class="settingBox"><h3>📂 Backup & Restore</h3><button class="primary">Export Residents</button><br><br><button class="primary">Export Logs</button></div>
+<div class="settingBox"><h3>🎨 Appearance</h3><select><option>Bright Theme</option><option>Dark Theme</option><option>Blue Theme</option></select></div>
+</div>
+</div>
+</section>
+
 </main>
 
 <script>
@@ -459,75 +214,49 @@ let logs=[
 "🔓 Admin Remote Unlock • Front Entrance • Unlocked"
 ];
 
+function showPage(page,el){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('activePage'));
+document.getElementById(page).classList.add('activePage');
+document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
+if(el)el.classList.add('active');
+render();
+}
+function showPageByName(page){showPage(page,null)}
+
 function render(list=residents){
-const table=document.getElementById("table");
-table.innerHTML="<tr><th>Name</th><th>Apt</th><th>Phone</th><th>Fob ID</th><th>Status</th><th>Last Used</th><th>Action</th></tr>";
-
+let row="<tr><th>Name</th><th>Apt</th><th>Phone</th><th>Fob ID</th><th>Status</th><th>Last Used</th><th>Action</th></tr>";
 list.forEach((r,i)=>{
-table.innerHTML+=`
-<tr>
-<td>${r.name}</td>
-<td>${r.apt}</td>
-<td>${r.phone}</td>
-<td>${r.fob}</td>
-<td><span class="badge ${r.status==='Active'?'active':'disabled'}">${r.status}</span></td>
-<td>${r.last}</td>
-<td><button class="danger" onclick="disableFob(${i})">Disable</button></td>
-</tr>`;
+row+=`<tr><td>${r.name}</td><td>${r.apt}</td><td>${r.phone}</td><td>${r.fob}</td><td><span class="badge ${r.status==='Active'?'active':'disabled'}">${r.status}</span></td><td>${r.last}</td><td><button class="danger" onclick="disableFob(${i})">Disable</button></td></tr>`;
 });
-
-document.getElementById("logs").innerHTML=logs.map(x=>`
-<div class="activity">
-<div class="circle">${x[0]}</div>
-<div>${x}<br><small>Just updated</small></div>
-</div>`).join("");
-
+["table","residentPageTable"].forEach(id=>{if(document.getElementById(id))document.getElementById(id).innerHTML=row});
+document.getElementById("fobTable").innerHTML=row;
+document.getElementById("logsBox").innerHTML=logs.map(x=>`<div class="activity"><div class="circle">${x[0]}</div><div>${x}<br><small>Just updated</small></div></div>`).join("");
+document.getElementById("fullLogs").innerHTML=logs.map(x=>`<div class="activity"><div class="circle">${x[0]}</div><div>${x}<br><small>${new Date().toLocaleString()}</small></div></div>`).join("");
 document.getElementById("count").innerText=residents.filter(r=>r.status==="Active").length;
 }
 
 function addResident(){
-const name=document.getElementById("name").value;
-const apt=document.getElementById("apt").value;
-const phone=document.getElementById("phone").value;
-const fob=document.getElementById("fob").value;
-
-if(!name||!apt||!fob){
-alert("Enter name, apartment, and fob ID.");
-return;
-}
-
+let name=document.getElementById("name").value, apt=document.getElementById("apt").value, phone=document.getElementById("phone").value, fob=document.getElementById("fob").value;
+if(!name||!apt||!fob)return alert("Enter name, apartment, and fob ID.");
 residents.unshift({name,apt,phone,fob,status:"Active",last:"Just added"});
 logs.unshift(`✅ ${name} • Apt ${apt} • New Fob Assigned • Fob ${fob}`);
 render();
 }
-
 function disableFob(i){
 residents[i].status="Disabled";
 logs.unshift(`🚫 ${residents[i].name} • Apt ${residents[i].apt} • Fob Disabled • ${residents[i].fob}`);
 render();
 }
-
 function remoteUnlock(){
 logs.unshift("🔓 Admin Remote Unlock • Front Entrance • Unlock command sent");
 alert("Remote unlock command sent.");
 render();
 }
-
 function filterResidents(){
-const q=document.getElementById("search").value.toLowerCase();
-
-const filtered=residents.filter(r=>
-r.name.toLowerCase().includes(q) ||
-r.apt.toLowerCase().includes(q) ||
-r.phone.toLowerCase().includes(q) ||
-r.fob.toLowerCase().includes(q)
-);
-
-render(filtered);
+let q=document.getElementById("search").value.toLowerCase();
+render(residents.filter(r=>r.name.toLowerCase().includes(q)||r.apt.toLowerCase().includes(q)||r.phone.toLowerCase().includes(q)||r.fob.toLowerCase().includes(q)));
 }
-
 render();
 </script>
-
 </body>
 </html>
