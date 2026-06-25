@@ -686,7 +686,59 @@ border-radius:16px;
 background:linear-gradient(135deg,#00d4ff,#2563eb);
 }
 
+/* ===== Mobile Premium Fix ===== */
+
+@media (max-width:850px){
+
+body{
+background-image:url("brick-bg.jpg") !important;
+background-size:55px auto !important;
+background-repeat:repeat !important;
+background-attachment:scroll !important;
 }
+
+.card{
+background:#fff !important;
+border-radius:30px;
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+.main{
+padding:12px 12px 120px !important;
+}
+
+.hero h1{
+font-size:32px !important;
+}
+
+.hero p{
+font-size:14px;
+}
+
+.stats{
+grid-template-columns:1fr 1fr !important;
+}
+
+.actions{
+grid-template-columns:1fr !important;
+}
+
+.quick{
+grid-template-columns:1fr !important;
+}
+
+.infoGrid{
+grid-template-columns:1fr !important;
+}
+
+table{
+display:block;
+overflow-x:auto;
+white-space:nowrap;
+}
+
+}
+
 </style>
 </head>
 
