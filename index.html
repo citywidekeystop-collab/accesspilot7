@@ -29,13 +29,14 @@ font-family:Inter,Arial,sans-serif;
 body{
 margin:0;
 color:var(--text);
-background-image:
-linear-gradient(rgba(255,255,255,.75),rgba(255,255,255,.75)),
-url("brick-bg.jpg");
-background-size:90px auto;
-background-repeat:repeat;
+background:
+radial-gradient(circle at 20% 20%, rgba(0,212,255,.22), transparent 28%),
+radial-gradient(circle at 80% 10%, rgba(37,99,235,.22), transparent 30%),
+radial-gradient(circle at 50% 90%, rgba(124,58,237,.20), transparent 35%),
+linear-gradient(135deg,#020617,#061326 45%,#0b1f3f);
+background-size:140% 140%;
+animation:moveBg 12s ease-in-out infinite;
 }
-
 button,input,select{
 font:inherit;
 }
@@ -736,7 +737,29 @@ display:block;
 overflow-x:auto;
 white-space:nowrap;
 }
+@keyframes moveBg{
+0%{
+background-position:0% 50%;
+}
 
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
+}
+body{
+margin:0;
+color:var(--text);
+background:
+radial-gradient(circle at 20% 20%, rgba(0,212,255,.22), transparent 28%),
+radial-gradient(circle at 80% 10%, rgba(37,99,235,.22), transparent 30%),
+radial-gradient(circle at 50% 90%, rgba(124,58,237,.20), transparent 35%),
+linear-gradient(135deg,#020617,#061326 45%,#0b1f3f);
+background-size:140% 140%;
+animation:moveBg 12s ease-in-out infinite;
 }
 
 </style>
