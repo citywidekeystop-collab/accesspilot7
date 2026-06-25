@@ -761,7 +761,24 @@ linear-gradient(135deg,#020617,#061326 45%,#0b1f3f);
 background-size:300% 300%;
 animation:moveBg 5s linear infinite;
 }
+body::before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+background-image:
+radial-gradient(circle,rgba(0,212,255,.8) 2px,transparent 3px),
+radial-gradient(circle,rgba(37,99,235,.55) 2px,transparent 3px);
+background-size:90px 90px,140px 140px;
+animation:floatDots 10s linear infinite;
+opacity:.35;
+z-index:-1;
+}
 
+@keyframes floatDots{
+from{transform:translateY(0);}
+to{transform:translateY(-180px);}
+}
 </style>
 </head>
 
