@@ -3,167 +3,135 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AccessPilot HOA</title>
+<title>AccessPilot v3</title>
 
 <style>
 :root{
---navy:#07152e;
---cyan:#00d4ff;
+--navy:#061326;
+--navy2:#0b1f3f;
+--card:rgba(255,255,255,.94);
+--line:#dbe5f3;
+--text:#061326;
+--muted:#64748b;
 --blue:#2563eb;
+--cyan:#00d4ff;
 --green:#22c55e;
---purple:#7c3aed;
 --orange:#f97316;
 --red:#ef4444;
---text:#07152e;
---muted:#64748b;
---line:#dbe5f3;
+--purple:#7c3aed;
 }
+
 *{
 box-sizing:border-box;
 font-family:Inter,Arial,sans-serif;
 }
+
 body{
 margin:0;
 color:var(--text);
-background-image:url("brick-bg.jpg");
+background-image:
+linear-gradient(rgba(255,255,255,.75),rgba(255,255,255,.75)),
+url("brick-bg.jpg");
+background-size:90px auto;
 background-repeat:repeat;
-background-size:70px auto;
-background-position:center;
-
-background-attachment:fixed;
 }
+
 button,input,select{
 font:inherit;
 }
 
 button{
 cursor:pointer;
+border:0;
 }
 
 .mobileTop{
 display:none;
-background:linear-gradient(180deg,#07152e,#020617);
-color:white;
-padding:14px 16px;
-justify-content:space-between;
-align-items:center;
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.mobileTop button{
-background:linear-gradient(135deg,var(--cyan),var(--blue));
-color:white;
-border:0;
-border-radius:12px;
-padding:8px 13px;
-font-size:22px;
 }
 
 .sidebar{
-width:292px;
-height:100vh;
+width:300px;
 position:fixed;
-top:0;
-left:0;
-z-index:999;
-overflow-y:auto;
-color:white;
+inset:0 auto 0 0;
 padding:24px 20px;
 background:linear-gradient(180deg,#07152e,#020617);
-box-shadow:18px 0 40px rgba(2,6,23,.25);
+color:#fff;
+overflow-y:auto;
+box-shadow:18px 0 40px rgba(2,6,23,.3);
+z-index:20;
 }
 
-.brand{
+.logoBox{
 text-align:center;
 margin-bottom:24px;
 }
 
-.brandLogo{
+.logoBox img{
 width:190px;
 max-width:100%;
-display:block;
-margin:0 auto 8px;
-border-radius:12px;
+border-radius:14px;
 }
 
-.fallbackLogo{
-display:none;
-font-size:30px;
+.logoFallback{
+font-size:31px;
 font-weight:950;
+display:none;
 }
 
-.fallbackLogo span{
+.logoFallback span{
 color:var(--cyan);
 }
 
 .tagline{
-color:#9fb3d9;
 font-size:11px;
+letter-spacing:1.5px;
+color:#9fb3d9;
 font-weight:800;
-letter-spacing:1.3px;
 text-transform:uppercase;
 }
 
 .nav{
-display:flex;
-align-items:center;
-gap:12px;
 padding:15px 16px;
-border-radius:15px;
-margin:7px 0;
+border-radius:16px;
+margin:8px 0;
 font-weight:900;
+display:flex;
+gap:12px;
+align-items:center;
 cursor:pointer;
-transition:.2s;
 }
 
 .nav.active,
 .nav:hover{
-background:linear-gradient(135deg,#00d4ff,#2563eb);
-box-shadow:0 10px 28px rgba(37,99,235,.35);
+background:linear-gradient(135deg,var(--cyan),var(--blue));
 }
 
-.promo{
-margin-top:28px;
+.pulseCard{
+margin-top:24px;
 padding:20px;
-border-radius:23px;
+border-radius:24px;
 background:linear-gradient(145deg,#084b8f,#1179ff);
-box-shadow:0 16px 35px rgba(0,0,0,.25);
 }
 
-.promo h3{
-margin:0 0 10px;
-font-size:20px;
-}
-
-.promo p{
-margin:0 0 18px;
-color:#dbeafe;
-font-weight:700;
-}
-
-.openButton{
+.openBtn{
 width:100%;
-height:76px;
-border:0;
+height:74px;
 border-radius:18px;
-background:linear-gradient(135deg,#22c55e,#00a63e);
-color:white;
-font-size:31px;
+color:#fff;
+font-size:30px;
 font-weight:950;
-box-shadow:0 0 26px rgba(34,197,94,.65),inset 0 0 0 2px rgba(255,255,255,.15);
+background:linear-gradient(135deg,#22c55e,#00a63e);
+box-shadow:0 0 28px rgba(34,197,94,.6);
 }
 
-.userBox{
-margin-top:28px;
-background:rgba(255,255,255,.08);
-border:1px solid rgba(255,255,255,.1);
-border-radius:18px;
-padding:16px;
+.profile{
+margin-top:24px;
 display:flex;
-align-items:center;
 gap:12px;
+align-items:center;
+background:rgba(255,255,255,.08);
+padding:15px;
+border-radius:18px;
 }
 
 .avatar{
@@ -175,140 +143,147 @@ color:#082f49;
 display:grid;
 place-items:center;
 font-weight:950;
-flex:none;
-}
-
-.onlineDot{
-color:#22c55e;
-font-size:13px;
-margin-top:6px;
 }
 
 .main{
-margin-left:292px;
+margin-left:300px;
+width:calc(100% - 300px);
 padding:28px 30px;
-min-height:100vh;
 }
 
 .top{
 display:flex;
+gap:18px;
 justify-content:space-between;
 align-items:center;
 margin-bottom:24px;
-gap:15px;
 }
 
 .search{
 width:min(560px,100%);
-padding:15px 20px;
+padding:16px 20px;
+border-radius:20px;
 border:1px solid var(--line);
-border-radius:18px;
-background:rgba(255,255,255,.96);
-box-shadow:0 10px 25px rgba(15,23,42,.08);
+background:#fff;
+box-shadow:0 10px 24px rgba(2,6,23,.08);
 font-weight:700;
 }
 
 .admin{
-background:rgba(255,255,255,.96);
-border:1px solid var(--line);
-border-radius:16px;
 padding:14px 18px;
+background:#fff;
+border-radius:18px;
+border:1px solid var(--line);
 font-weight:950;
-box-shadow:0 10px 25px rgba(15,23,42,.08);
-white-space:nowrap;
+box-shadow:0 10px 24px rgba(2,6,23,.08);
 }
 
 .hero{
-margin-bottom:22px;
-color:white;
-text-shadow:0 3px 10px rgba(0,0,0,.45);
+margin:0 0 22px;
+color:#fff;
+text-shadow:0 3px 12px rgba(0,0,0,.45);
 }
 
 .hero h1{
-font-size:38px;
+font-size:42px;
 margin:0 0 8px;
 }
 
 .hero span{
-color:#0077ff;
-text-shadow:0 2px 0 rgba(255,255,255,.45);
+color:var(--cyan);
 }
 
 .hero p{
 display:inline-block;
-padding:6px 10px;
-border-radius:10px;
-background:rgba(7,21,46,.58);
+background:rgba(7,21,46,.65);
+padding:9px 13px;
+border-radius:14px;
 font-weight:800;
 }
 
 .card{
-background:rgba(255,255,255,.94);
+background:var(--card);
 backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,.55);
-border-radius:24px;
+border:1px solid rgba(255,255,255,.6);
+border-radius:28px;
 padding:22px;
-box-shadow:0 20px 40px rgba(0,0,0,.14);
+box-shadow:0 20px 42px rgba(0,0,0,.14);
 }
 
 .stats{
 display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:14px;
-margin:0 0 22px;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+margin-bottom:22px;
 }
 
 .stat{
 display:flex;
-align-items:center;
 gap:14px;
-min-height:106px;
+align-items:center;
+min-height:112px;
 }
 
-.statIcon{
-width:54px;
-height:54px;
-border-radius:16px;
+.icon{
+width:56px;
+height:56px;
+border-radius:18px;
 display:grid;
 place-items:center;
-color:white;
-font-size:25px;
-box-shadow:0 10px 24px rgba(2,6,23,.18);
-flex:none;
+color:#fff;
+font-size:26px;
+box-shadow:0 12px 26px rgba(2,6,23,.18);
 }
 
-.blue{background:linear-gradient(135deg,#2563eb,#06b6d4)}
-.green{background:linear-gradient(135deg,#22c55e,#15803d)}
-.purple{background:linear-gradient(135deg,#7c3aed,#4f46e5)}
-.orange{background:linear-gradient(135deg,#f97316,#f59e0b)}
-.red{background:linear-gradient(135deg,#ef4444,#dc2626)}
-.cyan{background:linear-gradient(135deg,#00d4ff,#2563eb)}
+.blue{
+background:linear-gradient(135deg,#2563eb,#06b6d4);
+}
+
+.green{
+background:linear-gradient(135deg,#22c55e,#15803d);
+}
+
+.red{
+background:linear-gradient(135deg,#ef4444,#b91c1c);
+}
+
+.orange{
+background:linear-gradient(135deg,#f97316,#f59e0b);
+}
+
+.purple{
+background:linear-gradient(135deg,#7c3aed,#4f46e5);
+}
+
+.cyan{
+background:linear-gradient(135deg,#00d4ff,#2563eb);
+}
 
 .stat small{
 color:var(--muted);
-font-weight:800;
+font-weight:900;
 }
 
 .stat h2{
+font-size:30px;
 margin:3px 0 0;
-font-size:28px;
 }
 
-.layout{
+.grid{
 display:grid;
-grid-template-columns:1.75fr 1fr;
+grid-template-columns:1.7fr 1fr;
 gap:22px;
 }
 
 .property{
 display:grid;
-grid-template-columns:300px 1fr;
+grid-template-columns:320px 1fr;
 gap:24px;
 }
 
 .photo{
-height:282px;
-border-radius:22px;
+height:300px;
+border-radius:24px;
 background:
 linear-gradient(135deg,rgba(0,212,255,.12),rgba(37,99,235,.2)),
 url("https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=80");
@@ -317,88 +292,78 @@ background-position:center;
 position:relative;
 }
 
-.onlineBadge{
+.badgeLive{
 position:absolute;
 top:14px;
 left:14px;
 background:#22c55e;
-color:white;
-padding:8px 14px;
+color:#fff;
 border-radius:999px;
+padding:9px 15px;
 font-weight:950;
 }
-
 .statusLine{
-border:1px solid var(--line);
-border-radius:15px;
-padding:15px;
-margin:18px 0;
 display:flex;
 justify-content:space-between;
+align-items:center;
 gap:10px;
+padding:16px 18px;
+margin:18px 0;
+border-radius:18px;
+background:#f8fafc;
+border:1px solid var(--line);
 font-weight:900;
-background:white;
 }
 
 .primary{
 width:100%;
-border:0;
-border-radius:15px;
-padding:17px;
-color:white;
+height:64px;
+border-radius:20px;
+color:#fff;
 font-weight:950;
 background:linear-gradient(135deg,#22c55e,#059669);
 box-shadow:0 12px 28px rgba(34,197,94,.25);
 }
 
-.miniStats{
+.actions{
 display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin-top:16px;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:14px;
 }
 
-.miniStats div{
-background:#f8fafc;
-border:1px solid var(--line);
-border-radius:14px;
-padding:12px;
-text-align:center;
-font-weight:950;
+.actions button{
+color:#fff;
+border-radius:16px;
+padding:14px;
+font-weight:900;
 }
 
-.controlGrid{
+.infoGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:12px;
 }
 
-.controlItem{
+.infoItem{
+background:#f8fafc;
+border:1px solid var(--line);
+border-radius:18px;
+padding:16px;
 display:flex;
 justify-content:space-between;
-gap:10px;
-border:1px solid var(--line);
-border-radius:14px;
-padding:14px;
+align-items:center;
 font-weight:900;
-background:#f8fafc;
 }
 
-.activityItem{
-display:flex;
-gap:14px;
-padding:15px 0;
-border-bottom:1px solid var(--line);
+.infoItem.click{
+cursor:pointer;
+transition:.2s;
 }
 
-.activityIcon{
-width:42px;
-height:42px;
-border-radius:50%;
-display:grid;
-place-items:center;
-flex:none;
-background:#e0f2fe;
+.infoItem.click:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 20px rgba(0,0,0,.12);
 }
 
 .quick{
@@ -408,11 +373,50 @@ gap:12px;
 }
 
 .quick button{
-border:0;
-border-radius:14px;
-color:white;
-padding:15px;
-font-weight:950;
+height:60px;
+border-radius:18px;
+color:#fff;
+font-weight:900;
+}
+
+.activity{
+display:flex;
+gap:14px;
+padding:16px 0;
+border-bottom:1px solid var(--line);
+}
+
+.activityIcon{
+width:46px;
+height:46px;
+border-radius:50%;
+display:grid;
+place-items:center;
+background:#e0f2fe;
+flex:none;
+}
+
+.page{
+display:none;
+}
+
+.page.show{
+display:block;
+}
+
+.form{
+display:grid;
+grid-template-columns:1fr 1fr 1fr 1fr auto;
+gap:10px;
+margin-bottom:18px;
+}
+
+input,
+select{
+padding:14px;
+border-radius:15px;
+border:1px solid var(--line);
+background:#fff;
 }
 
 table{
@@ -420,21 +424,22 @@ width:100%;
 border-collapse:collapse;
 }
 
-th,td{
-text-align:left;
+th,
+td{
 padding:14px;
+text-align:left;
 border-bottom:1px solid var(--line);
 }
 
 th{
-color:#2563eb;
+color:var(--blue);
 }
 
-.badge{
-border-radius:999px;
+.status{
 padding:7px 11px;
+border-radius:999px;
 font-size:12px;
-font-weight:950;
+font-weight:900;
 }
 
 .active{
@@ -447,42 +452,21 @@ background:#fee2e2;
 color:#dc2626;
 }
 
-.enableBtn,.disableBtn{
-color:white;
-border:0;
-border-radius:11px;
+.enable,
+.disable{
+color:#fff;
+border-radius:12px;
 padding:10px 13px;
-font-weight:950;
+font-weight:900;
 margin:2px;
 }
 
-.enableBtn{
-background:linear-gradient(135deg,#22c55e,#16a34a);
+.enable{
+background:#22c55e;
 }
 
-.disableBtn{
-background:linear-gradient(135deg,#ef4444,#b91c1c);
-}
-
-.form{
-display:grid;
-grid-template-columns:1fr 1fr 1fr 1fr auto;
-gap:10px;
-}
-
-input,select{
-padding:14px;
-border:1px solid var(--line);
-border-radius:14px;
-background:white;
-}
-
-.page{
-display:none;
-}
-
-.page.activePage{
-display:block;
+.disable{
+background:#ef4444;
 }
 
 .settingsGrid{
@@ -491,74 +475,43 @@ grid-template-columns:1fr 1fr;
 gap:18px;
 }
 
-.settingBox{
-background:linear-gradient(180deg,#fff,#f8fbff);
+.setting{
+background:#f8fafc;
 border:1px solid var(--line);
-border-radius:20px;
+border-radius:22px;
 padding:20px;
 }
 
-.settingHeader{
+.settingHead{
 display:flex;
 gap:14px;
-margin-bottom:16px;
+align-items:flex-start;
 }
 
 .settingIcon{
-width:52px;
-height:52px;
-border-radius:17px;
+width:54px;
+height:54px;
+border-radius:18px;
 display:grid;
 place-items:center;
-color:white;
+color:#fff;
 font-size:24px;
-flex:none;
 }
 
 .timeGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:12px;
+gap:10px;
 }
 
-.fancyBtn{
+.fullBtn{
 width:100%;
-border:0;
-border-radius:14px;
-padding:14px;
-margin-top:12px;
-color:white;
-font-weight:950;
+margin-top:14px;
+padding:15px;
+border-radius:16px;
+color:#fff;
+font-weight:900;
 }
-
-.alertGrid{
-display:grid;
-gap:16px;
-}
-
-.alertCard{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:22px;
-border-radius:20px;
-border:1px solid var(--line);
-}
-
-.alertCard button{
-border:0;
-border-radius:14px;
-padding:13px 18px;
-color:white;
-font-weight:950;
-}
-
-.redAlert{background:#fff1f2}
-.redAlert button{background:#ef4444}
-.orangeAlert{background:#fff7ed}
-.orangeAlert button{background:#f97316}
-.greenAlert{background:#f0fdf4}
-.greenAlert button{background:#22c55e}
 
 .modalBg{
 position:fixed;
@@ -566,151 +519,287 @@ inset:0;
 display:none;
 align-items:center;
 justify-content:center;
-background:rgba(2,6,23,.6);
+background:rgba(2,6,23,.60);
 z-index:9999;
 }
 
 .modal{
 width:min(500px,92vw);
-background:white;
-border-radius:24px;
+background:#fff;
+border-radius:28px;
 padding:26px;
 }
 
-.modalActions{
+.modalGrid{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:12px;
 }
 
-.cancel,.unlock{
-border:0;
-border-radius:14px;
-padding:14px;
+.cancel{
+background:#e5e7eb;
+border-radius:16px;
+padding:15px;
+font-weight:900;
+}
+
+.unlock{
+background:#f97316;
+color:#fff;
+border-radius:16px;
+padding:15px;
+font-weight:900;
+}
+
+.bottomNav{
+display:none;
+}
+
+@media(max-width:850px){
+
+body{
+background-size:80px auto;
+background-attachment:scroll;
+}
+
+.mobileTop{
+display:flex;
+height:76px;
+padding:16px 20px;
+justify-content:space-between;
+align-items:center;
+background:linear-gradient(180deg,#061326,#020617);
+color:#fff;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.mobileTop b{
+font-size:23px;
 font-weight:950;
 }
 
-.cancel{background:#e5e7eb}
-.unlock{background:#f97316;color:white}
+.mobileTop button{
+width:56px;
+height:56px;
+border-radius:18px;
+background:linear-gradient(135deg,#00d4ff,#2563eb);
+color:#fff;
+font-size:28px;
+}
 
-@media(max-width:850px){
-.mobileTop{display:flex}
 .sidebar{
 left:-330px;
 width:310px;
 transition:.3s;
 }
-.sidebar.show{left:0}
-.main{margin-left:0;padding:16px}
-.top{display:block}
-.search{width:100%;margin-bottom:12px}
-.admin{display:none}
-.hero h1{font-size:28px}
-.stats{grid-template-columns:1fr 1fr}
-.layout,.property,.form,.settingsGrid{display:block}
-.photo{height:220px;margin-bottom:15px}
-.miniStats,.controlGrid,.quick,.timeGrid{grid-template-columns:1fr}
-table{display:block;overflow-x:auto;white-space:nowrap}
-.card{margin-bottom:16px}
+
+.sidebar.show{
+left:0;
+}
+
+.main{
+margin-left:0;
+width:100%;
+padding:18px 14px 95px;
+}
+
+.top{
+display:block;
+}
+
+.search{
+width:100%;
+height:58px;
+}
+
+.admin{
+display:none;
+}
+
+.hero h1{
+font-size:31px;
+line-height:1.08;
+}
+
+.stats{
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.grid,
+.property,
+.form,
+.settingsGrid{
+display:block;
+}
+
+.card{
+margin-bottom:18px;
+border-radius:30px;
+}
+
+.photo{
+height:255px;
+margin-bottom:18px;
+}
+
+.actions,
+.quick,
+.infoGrid,
+.timeGrid{
+grid-template-columns:1fr;
+}
+
+.form input,
+.form select,
+.form button{
+width:100%;
+margin-bottom:12px;
+}
+
+.bottomNav{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+position:fixed;
+left:12px;
+right:12px;
+bottom:12px;
+padding:9px;
+border-radius:24px;
+background:#07152e;
+box-shadow:0 14px 30px rgba(0,0,0,.35);
+}
+
+.bottomNav button{
+background:transparent;
+color:#fff;
+font-size:12px;
+font-weight:900;
+padding:8px;
+border-radius:16px;
+}
+
+.bottomNav button.active{
+background:linear-gradient(135deg,#00d4ff,#2563eb);
+}
+
 }
 </style>
 </head>
 
 <body>
 <div class="mobileTop">
-<b>AccessPilot HOA</b>
+<b>AccessPilot</b>
 <button onclick="toggleMenu()">☰</button>
 </div>
 
 <aside class="sidebar" id="sidebar">
-<div class="brand">
-<img src="accesspilot-logo.png" class="brandLogo" alt="AccessPilot Logo" onerror="this.style.display='none';document.querySelector('.fallbackLogo').style.display='block';">
-<div class="fallbackLogo">ACCESS<span>PILOT</span></div>
+<div class="logoBox">
+<img src="accesspilot-logo.png" onerror="this.style.display='none';document.querySelector('.logoFallback').style.display='block';" />
+<div class="logoFallback">ACCESS<span>PILOT</span></div>
 <div class="tagline">Secure Access. Total Control.</div>
 </div>
 
 <div class="nav active" onclick="showPage('dashboard',this)">🏠 Dashboard</div>
-<div class="nav" onclick="showPage('residents',this)">👥 Units / Residents</div>
-<div class="nav" onclick="showPage('fobs',this)">🔑 Assign Fobs</div>
+<div class="nav" onclick="showPage('properties',this)">🏢 Properties</div>
+<div class="nav" onclick="showPage('residents',this)">👥 Residents</div>
+<div class="nav" onclick="showPage('credentials',this)">🔑 Credentials</div>
+<div class="nav" onclick="showPage('doors',this)">🚪 Doors</div>
 <div class="nav" onclick="showPage('activity',this)">📋 Activity</div>
 <div class="nav" onclick="showPage('reports',this)">📊 Reports</div>
-<div class="nav" onclick="showPage('alerts',this)">🔔 Alerts</div>
-<div class="nav" onclick="showPage('settings',this)">⚙️ HOA Settings</div>
+<div class="nav" onclick="showPage('settings',this)">⚙️ Settings</div>
 
-<div class="promo">
+<div class="pulseCard">
 <h3>Clubhouse Entrance</h3>
-<p>Unlock the clubhouse remotely.</p>
-<button class="openButton" onclick="openUnlock()">OPEN 🔓</button>
+<p>Remote access control</p>
+<button class="openBtn" onclick="openUnlock()">OPEN 🔓</button>
 </div>
 
-<div class="userBox">
+<div class="profile">
 <div class="avatar">J</div>
 <div>
 <b>Jamie</b><br>
-<small>HOA Administrator</small>
-<div class="onlineDot">● Online</div>
+<small>Property Admin</small><br>
+<small style="color:#22c55e">● Online</small>
 </div>
 </div>
 </aside>
 
 <main class="main">
 <div class="top">
-<input class="search" id="search" oninput="filterResidents()" placeholder="🔍 Search unit, resident, phone, fob ID...">
-<div class="admin">Jamie • HOA Admin ▾</div>
+<input class="search" id="search" oninput="filterResidents()" placeholder="🔍 Search resident, unit, phone, credential...">
+<div class="admin">Jamie • Admin ▾</div>
 </div>
 
-<section id="dashboard" class="page activePage">
+<section id="dashboard" class="page show">
 <div class="hero">
-<h1>Welcome back, <span>Jamie!</span> 👋</h1>
+<h1>Welcome back, <span>Jamie</span> 👋</h1>
 <p>8925 Carls Court, Ellicott City, MD 21043 • Clubhouse Access</p>
 </div>
 
 <div class="stats">
-<div class="card stat"><div class="statIcon blue">🏘️</div><div><small>Units</small><h2>200</h2></div></div>
-<div class="card stat"><div class="statIcon purple">🔑</div><div><small>Assigned Fobs</small><h2 id="activeFobCount">400</h2></div></div>
-<div class="card stat"><div class="statIcon green">✅</div><div><small>Entries Today</small><h2>156</h2></div></div>
-<div class="card stat"><div class="statIcon red">✕</div><div><small>Denied</small><h2>4</h2></div></div>
-<div class="card stat"><div class="statIcon orange">🕘</div><div><small>Access Hours</small><h2 id="dashHours">8 AM-9 PM</h2></div></div>
-<div class="card stat"><div class="statIcon cyan">📶</div><div><small>Status</small><h2 id="systemStatus">Online</h2></div></div>
+<div class="card stat"><div class="icon blue">🏢</div><div><small>Properties</small><h2>1</h2></div></div>
+<div class="card stat"><div class="icon purple">👥</div><div><small>Residents</small><h2>200</h2></div></div>
+<div class="card stat"><div class="icon green">🔑</div><div><small>Active Credentials</small><h2 id="activeCount">400</h2></div></div>
+<div class="card stat"><div class="icon cyan">✅</div><div><small>Entries Today</small><h2>156</h2></div></div>
+<div class="card stat"><div class="icon red">⛔</div><div><small>Denied</small><h2>4</h2></div></div>
+<div class="card stat"><div class="icon orange">🕘</div><div><small>Access Hours</small><h2 id="dashHours">8-9</h2></div></div>
+<div class="card stat"><div class="icon blue">📶</div><div><small>Devices Online</small><h2>3</h2></div></div>
+<div class="card stat"><div class="icon purple">🎫</div><div><small>Open Tickets</small><h2>0</h2></div></div>
 </div>
 
-<div class="layout">
+<div class="grid">
 <div>
 <div class="card property">
-<div class="photo"><div class="onlineBadge">● ONLINE</div></div>
+<div class="photo">
+<div class="badgeLive">● ONLINE</div>
+</div>
+
 <div>
-<h2>Clubhouse Access Control ✅</h2>
-<p>8925 Carls Court, Ellicott City, MD 21043</p>
-<div class="statusLine"><span>🔒 Clubhouse Entrance</span><span style="color:#16a34a">Online</span></div>
+<h2>Clubhouse Access Control</h2>
+<p>Primary access point for residents and approved guests.</p>
+
+<div class="statusLine">
+<span>🚪 Clubhouse Entrance</span>
+<span style="color:#16a34a">Online</span>
+</div>
+
 <button class="primary" onclick="openUnlock()">🔓 Unlock Clubhouse Entrance</button>
-<div class="miniStats">
-<div>Units<br>200</div>
-<div>Fobs<br>400</div>
-<div>Entries<br>156</div>
-<div>Denied<br>4</div>
+
+<div class="actions">
+<button class="blue" onclick="addLog('🔒 Door lock command sent')">Lock</button>
+<button class="orange" onclick="addLog('📹 Live camera opened')">Camera</button>
+<button class="purple" onclick="showPageByName('activity')">Logs</button>
 </div>
 </div>
 </div>
 
 <div class="card" style="margin-top:22px">
-<h2>HOA Control Center</h2>
-<div class="controlGrid">
-<div class="controlItem">Access Hours <b id="hoursStatus">8:00 AM - 9:00 PM</b></div>
-<div class="controlItem">Emergency Shutdown <b id="shutdownStatus" style="color:#16a34a">OFF</b></div>
-<div class="controlItem">Manager Override <b id="overrideStatus" style="color:#16a34a">OFF</b></div>
-<div class="controlItem">HOA Admin <b>Jamie</b></div>
+<h2>Access Control Center</h2>
+<div class="infoGrid">
+<div class="infoItem click" onclick="showPageByName('settings')">Access Hours <b id="hoursStatus">8:00 AM - 9:00 PM</b></div>
+<div class="infoItem click" onclick="toggleShutdown()">Emergency Shutdown <b id="shutdownStatus" style="color:#16a34a">OFF</b></div>
+<div class="infoItem click" onclick="showPageByName('settings')
+<div class="infoItem click" onclick="showPageByName('settings')">Manager Override <b id="overrideStatus">OFF</b></div>
+<div class="infoItem click" onclick="showPageByName('doors')">Reader Status <b style="color:#16a34a">Online</b></div>
 </div>
 </div>
 
 <div class="card" style="margin-top:22px">
-<h2>Unit / Fob Tracking</h2>
-<table id="table"></table>
+<h2>Credential Tracking</h2>
+<table id="mainTable"></table>
 </div>
 </div>
 
 <div>
 <div class="card">
-<h2>Recent Activity <button onclick="showPageByName('activity')" style="float:right;border:0;border-radius:12px;padding:10px 14px;font-weight:900">View All</button></h2>
+<h2>
+Recent Activity
+<button onclick="showPageByName('activity')" style="float:right;padding:10px 14px;border-radius:12px;font-weight:900">View All</button>
+</h2>
 <div id="logsBox"></div>
 <button class="primary" onclick="showPageByName('activity')">View Full Activity</button>
 </div>
@@ -719,10 +808,40 @@ table{display:block;overflow-x:auto;white-space:nowrap}
 <h2>Quick Actions</h2>
 <div class="quick">
 <button class="green" onclick="showPageByName('residents')">Add Resident</button>
-<button class="blue" onclick="showPageByName('fobs')">Assign Fob</button>
+<button class="blue" onclick="showPageByName('credentials')">Assign Fob</button>
 <button class="orange" onclick="openUnlock()">Unlock</button>
-<button class="purple" onclick="exportResidents()">Export</button>
+<button class="purple" onclick="exportCSV()">Export</button>
 </div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="properties" class="page">
+<div class="card">
+<h1>🏢 Properties</h1>
+<p>Manage locations and access points.</p>
+
+<div class="property">
+<div class="photo">
+<div class="badgeLive">● ONLINE</div>
+</div>
+
+<div>
+<h2>8925 Carls Court</h2>
+<p>Ellicott City, MD 21043</p>
+
+<div class="statusLine">
+<span>Doors</span>
+<b>1</b>
+</div>
+
+<div class="statusLine">
+<span>Readers</span>
+<b>1</b>
+</div>
+
+<button class="primary" onclick="showPageByName('doors')">View Doors</button>
 </div>
 </div>
 </div>
@@ -730,133 +849,230 @@ table{display:block;overflow-x:auto;white-space:nowrap}
 
 <section id="residents" class="page">
 <div class="card">
-<h1>👥 Units / Residents</h1>
-<p>200 condos, 2 fobs per unit.</p>
+<h1>👥 Residents</h1>
+
 <div class="form">
 <input id="name" placeholder="Resident name">
-<input id="apt" placeholder="Unit #">
+<input id="unit" placeholder="Unit #">
 <input id="phone" placeholder="Phone">
 <input id="fob" placeholder="Fob ID">
 <button class="primary" onclick="addResident()">Add</button>
 </div>
-<br>
+
 <table id="residentTable"></table>
 </div>
 </section>
 
-<section id="fobs" class="page">
+<section id="credentials" class="page">
 <div class="card">
-<h1>🔑 Assign / Replace Fob</h1>
+<h1>🔑 Credentials</h1>
+
 <div class="form">
-<input id="fobResidentName" placeholder="Resident name">
-<input id="fobApt" placeholder="Unit #">
-<input id="newFobId" placeholder="New Fob ID">
-<select id="fobAction">
-<option value="assign">Assign New Fob</option>
-<option value="replace">Replace Lost Fob</option>
+<input id="credName" placeholder="Resident name">
+<input id="credUnit" placeholder="Unit #">
+<input id="credId" placeholder="New Fob/Card ID">
+
+<select id="credAction">
+<option value="assign">Assign New</option>
+<option value="replace">Replace Lost</option>
 </select>
-<button class="primary" onclick="assignFob()">Assign</button>
+
+<button class="primary" onclick="assignCredential()">Assign</button>
 </div>
+
+<table id="credentialTable"></table>
+</div>
+</section>
+
+<section id="doors" class="page">
+<div class="card">
+<h1>🚪 Doors</h1>
+
+<div class="infoGrid">
+<div class="infoItem">Clubhouse Entrance <b style="color:#16a34a">Online</b></div>
+<div class="infoItem">Reader Battery <b>100%</b></div>
+<div class="infoItem">Last Unlock <b>Just now</b></div>
+<div class="infoItem">Schedule <b id="doorHours">8:00 AM - 9:00 PM</b></div>
+</div>
+
 <br>
-<table id="fobTable"></table>
+<button class="primary" onclick="openUnlock()">Unlock Door</button>
 </div>
 </section>
 
 <section id="activity" class="page">
 <div class="card">
-<h1>📋 Full Activity Feed</h1>
+<h1>📋 Activity Feed</h1>
 <div id="fullLogs"></div>
 </div>
 </section>
 
 <section id="reports" class="page">
 <div class="card">
-<h1>📊 HOA Reports</h1>
-<p>Daily Entries: 156</p>
-<p>Weekly Entries: 842</p>
-<p>Denied This Week: 18</p>
-<button class="primary" onclick="exportResidents()">Export Resident/Fob Report</button>
-</div>
-</section>
+<h1>📊 Reports</h1>
 
-<section id="alerts" class="page">
-<div class="card">
-<h1>🔔 System Alerts</h1>
-<div class="alertGrid">
-<div class="alertCard redAlert">
-<div><h3>Denied Access Attempt</h3><p>Unknown fob tried to enter clubhouse.</p></div>
-<button onclick="showPageByName('activity')">View Log</button>
+<div class="stats">
+<div class="card stat">
+<div class="icon green">✅</div>
+<div><small>Weekly Entries</small><h2>842</h2></div>
 </div>
-<div class="alertCard orangeAlert">
-<div><h3>Emergency Shutdown</h3><p id="shutdownAlertText">System is currently active.</p></div>
-<button id="shutdownBtn" onclick="toggleShutdown()">Disable All Fobs</button>
+
+<div class="card stat">
+<div class="icon red">⛔</div>
+<div><small>Denied This Week</small><h2>18</h2></div>
 </div>
-<div class="alertCard greenAlert">
-<div><h3>Reader Status</h3><p>Clubhouse reader is online.</p></div>
-<button onclick="showPageByName('settings')">Settings</button>
+
+<div class="card stat">
+<div class="icon blue">🔓</div>
+<div><small>Remote Unlocks</small><h2 id="unlockCount">12</h2></div>
+</div>
+
+<div class="card stat">
+<div class="icon purple">📦</div>
+<div><small>Exports</small><h2>CSV</h2></div>
 </div>
 </div>
+
+<button class="primary" onclick="exportCSV()">Export CSV Report</button>
 </div>
 </section>
 
 <section id="settings" class="page">
 <div class="card">
-<h1>⚙️ HOA Settings</h1>
-<p style="color:var(--muted)">Control clubhouse hours, emergency access, fob capacity, and HOA administrator permissions.</p>
+<h1>⚙️ Settings</h1>
+<p style="color:var(--muted)">Control access schedules, emergency mode, administrators, and exports.</p>
 
 <div class="settingsGrid">
-<div class="settingBox">
-<div class="settingHeader"><div class="settingIcon blue">🏢</div><div><h3>Property Information</h3><p>8925 Carls Court<br>Ellicott City, MD 21043</p></div></div>
+<div class="setting">
+<div class="settingHead">
+<div class="settingIcon blue">🏢</div>
+<div>
+<h3>Property</h3>
+<p>8925 Carls Court<br>Ellicott City, MD 21043</p>
 </div>
-<div class="settingBox">
-<div class="settingHeader"><div class="settingIcon cyan">👤</div><div><h3>HOA Administrator</h3><p>Jamie<br>Full Access Enabled</p></div></div>
 </div>
-<div class="settingBox">
-<div class="settingHeader"><div class="settingIcon orange">⏰</div><div><h3>Access Hours</h3><p>Set when fobs are allowed to work.</p></div></div>
-<div class="timeGrid"><input type="time" id="openTime" value="08:00"><input type="time" id="closeTime" value="21:00"></div>
-<button class="fancyBtn green" onclick="saveAccessHours()">Save Access Hours</button>
 </div>
-<div class="settingBox">
-<div class="settingHeader"><div class="settingIcon red">🚨</div><div><h3>Emergency Shutdown</h3><p id="shutdownSettingText">System active. All approved fobs currently work.</p></div></div>
-<button class="fancyBtn red" id="shutdownSettingBtn" onclick="toggleShutdown()">Disable All Fobs</button>
+
+<div class="setting">
+<div class="settingHead">
+<div class="settingIcon cyan">👤</div>
+<div>
+<h3>Administrator</h3>
+<p>Jamie<br>Full Access Enabled</p>
 </div>
-<div class="settingBox">
-<div class="settingHeader"><div class="settingIcon purple">🔓</div><div><h3>Manager Override</h3><p>Extend clubhouse access for a special event.</p></div></div>
+</div>
+</div>
+
+<div class="setting">
+<div class="settingHead">
+<div class="settingIcon orange">⏰</div>
+<div>
+<h3>Access Hours</h3>
+<p>Set when credentials work.</p>
+</div>
+</div>
+
+<div class="timeGrid">
+<input type="time" id="openTime" value="08:00">
+<input type="time" id="closeTime" value="21:00">
+</div>
+
+<button class="fullBtn green" onclick="saveHours()">Save Access Hours</button>
+</div>
+
+<div class="setting">
+<div class="settingHead">
+<div class="settingIcon red">🚨</div>
+<div>
+<h3>Emergency Shutdown</h3>
+<p id="shutdownText">System active. Credentials currently work.</p>
+</div>
+</div>
+
+<button class="fullBtn red" id="shutdownBtn" onclick="toggleShutdown()">Disable All Credentials</button>
+</div>
+
+<div class="setting">
+<div class="settingHead">
+<div class="settingIcon purple">🔓</div>
+<div>
+<h3>Manager Override</h3>
+<p>Extend access for a special event.</p>
+</div>
+</div>
+
 <input type="time" id="overrideTime" value="23:59">
-<button class="fancyBtn purple" onclick="activateOverride()">Activate Override</button>
+<button class="fullBtn purple" onclick="activateOverride()">Activate Override</button>
 </div>
-<div class="settingBox">
-<div class="settingHeader"><div class="settingIcon green">🔑</div><div><h3>Fob Capacity</h3><p>200 Units<br>2 Fobs Per Unit<br>400 Total Fobs</p></div></div>
-<button class="fancyBtn blue" onclick="exportResidents()">Export Fob List</button>
+
+<div class="setting">
+<div class="settingHead">
+<div class="settingIcon green">📤</div>
+<div>
+<h3>Backup / Export</h3>
+<p>Download residents and credentials.</p>
+</div>
+</div>
+
+<button class="fullBtn blue" onclick="exportCSV()">Export Data</button>
 </div>
 </div>
 </div>
 </section>
 </main>
 
+<div class="bottomNav">
+<button class="active" onclick="showPageByName('dashboard')">🏠<br>Home</button>
+<button onclick="showPageByName('residents')">👥<br>People</button>
+<button onclick="showPageByName('credentials')">🔑<br>Fobs</button>
+<button onclick="openUnlock()">🔓<br>Open</button>
+<button onclick="showPageByName('settings')">⚙️<br>Set</button>
+</div>
+
 <div class="modalBg" id="modal">
 <div class="modal">
 <h2>Unlock Clubhouse Entrance?</h2>
 <p>This creates an audit log.</p>
-<div class="modalActions">
-<button class="cancel" onclick="closeUnlock()">Cancel</button>
-<button class="unlock" onclick="confirmUnlock()">Unlock Door</button>
-</div>
-</div>
-</div>
 
+<div class="modalGrid">
+<button class="cancel" onclick="closeUnlock()">Cancel</button>
+<button class="unlock" onclick="confirmUnlock()">Unlock</button>
+</div>
+</div>
+</div>
 <script>
+let emergency=false;
+let override=false;
 let remoteUnlocks=12;
-let emergencyShutdown=false;
 let accessStart="08:00";
 let accessEnd="21:00";
-let overrideEnabled=false;
 let overrideEnd="23:59";
 
 let residents=[
-{name:"John Smith",apt:"204",phone:"410-555-1111",fob:"A82F19",status:"Active",last:"2 min ago"},
-{name:"Maria Garcia",apt:"305",phone:"410-555-2222",fob:"B77C91",status:"Active",last:"28 min ago"},
-{name:"David Lee",apt:"101",phone:"410-555-3333",fob:"C13D55",status:"Active",last:"1 hr ago"}
+{
+name:"John Smith",
+unit:"204",
+phone:"410-555-1111",
+cred:"A82F19",
+status:"Active",
+last:"2 min ago"
+},
+{
+name:"Maria Garcia",
+unit:"305",
+phone:"410-555-2222",
+cred:"B77C91",
+status:"Active",
+last:"28 min ago"
+},
+{
+name:"David Lee",
+unit:"101",
+phone:"410-555-3333",
+cred:"C13D55",
+status:"Active",
+last:"1 hr ago"
+}
 ];
 
 let logs=[
@@ -877,10 +1093,24 @@ document.getElementById("sidebar").classList.remove("show");
 }
 
 function showPage(page,el){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("activePage"));
-document.getElementById(page).classList.add("activePage");
-document.querySelectorAll(".nav").forEach(n=>n.classList.remove("active"));
-if(el)el.classList.add("active");
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("show");
+});
+
+document.getElementById(page).classList.add("show");
+
+document.querySelectorAll(".nav").forEach(n=>{
+n.classList.remove("active");
+});
+
+if(el){
+el.classList.add("active");
+}
+
+document.querySelectorAll(".bottomNav button").forEach(b=>{
+b.classList.remove("active");
+});
+
 closeMenu();
 render();
 }
@@ -898,189 +1128,348 @@ function closeUnlock(){
 document.getElementById("modal").style.display="none";
 }
 
+function addLog(txt){
+logs.unshift(txt);
+render();
+}
+
 function confirmUnlock(){
 remoteUnlocks++;
-logs.unshift("🔓 Jamie • HOA Admin • Clubhouse remote unlock command sent");
+logs.unshift("🔓 Jamie • Property Admin • Remote unlock command sent");
 closeUnlock();
 render();
 alert("Unlock command sent.");
 }
 
-function formatTime(t){
-let [h,m]=t.split(":");
-h=parseInt(h);
+function fmt(t){
+let parts=t.split(":");
+let h=parseInt(parts[0]);
+let m=parts[1];
 let a=h>=12?"PM":"AM";
 h=h%12||12;
 return `${h}:${m} ${a}`;
 }
 
-function saveAccessHours(){
+function saveHours(){
 accessStart=document.getElementById("openTime").value;
 accessEnd=document.getElementById("closeTime").value;
-logs.unshift(`⏰ Jamie • Access hours changed to ${formatTime(accessStart)} - ${formatTime(accessEnd)}`);
+
+logs.unshift(
+`⏰ Access hours changed to ${fmt(accessStart)} - ${fmt(accessEnd)}`
+);
+
 render();
 alert("Access hours saved.");
 }
 
 function toggleShutdown(){
-emergencyShutdown=!emergencyShutdown;
-logs.unshift(emergencyShutdown
-? "🚨 Jamie • Emergency shutdown activated - all fobs disabled"
-: "🟢 Jamie • Emergency shutdown disabled - fobs enabled");
+emergency=!emergency;
+
+logs.unshift(
+emergency
+? "🚨 Emergency shutdown enabled - credentials disabled"
+: "🟢 Emergency shutdown disabled - credentials enabled"
+);
+
 render();
 }
 
 function activateOverride(){
-overrideEnabled=true;
+override=true;
 overrideEnd=document.getElementById("overrideTime").value;
-logs.unshift(`🔓 Jamie • Manager override active until ${formatTime(overrideEnd)}`);
+
+logs.unshift(
+`🔓 Manager override active until ${fmt(overrideEnd)}`
+);
+
 render();
-alert("Manager override activated.");
-}
-
-function assignFob(){
-let name=document.getElementById("fobResidentName").value.trim();
-let apt=document.getElementById("fobApt").value.trim();
-let fob=document.getElementById("newFobId").value.trim();
-let action=document.getElementById("fobAction").value;
-
-if(!name||!apt||!fob){
-return alert("Enter resident name, unit, and fob ID.");
-}
-
-let r=residents.find(x=>x.name.toLowerCase()===name.toLowerCase()||x.apt===apt);
-
-if(r){
-let old=r.fob;
-r.fob=fob;
-r.status="Active";
-r.last="Just assigned";
-logs.unshift(action==="replace"
-? `🔁 ${name} • Unit ${apt} • Lost fob ${old} replaced with ${fob}`
-: `🔑 ${name} • Unit ${apt} • New fob assigned • ${fob}`);
-}else{
-residents.unshift({name,apt,phone:"",fob,status:"Active",last:"Just assigned"});
-logs.unshift(`✅ ${name} • Unit ${apt} • Resident created and fob assigned • ${fob}`);
-}
-
-document.getElementById("fobResidentName").value="";
-document.getElementById("fobApt").value="";
-document.getElementById("newFobId").value="";
-render();
-}
-
-function render(list=residents){
-let row="<tr><th>Name</th><th>Unit</th><th>Phone</th><th>Fob ID</th><th>Status</th><th>Last Used</th><th>Action</th></tr>";
-
-list.forEach((r,i)=>{
-row+=`
-<tr>
-<td>${r.name}</td>
-<td>${r.apt}</td>
-<td>${r.phone}</td>
-<td>${r.fob}</td>
-<td><span class="badge ${r.status==='Active'?'active':'disabled'}">${r.status}</span></td>
-<td>${r.last}</td>
-<td>
-<button class="enableBtn" onclick="enableFob(${i})">Enable</button>
-<button class="disableBtn" onclick="disableFob(${i})">Disable</button>
-</td>
-</tr>`;
-});
-
-["table","residentTable","fobTable"].forEach(id=>{
-if(document.getElementById(id)){
-document.getElementById(id).innerHTML=row;
-}
-});
-
-document.getElementById("logsBox").innerHTML=logs.slice(0,4).map(x=>`
-<div class="activityItem">
-<div class="activityIcon">${x[0]}</div>
-<div><b>${x}</b><br><small>Just updated</small></div>
-</div>`).join("");
-
-document.getElementById("fullLogs").innerHTML=logs.map(x=>`
-<div class="activityItem">
-<div class="activityIcon">${x[0]}</div>
-<div><b>${x}</b><br><small>${new Date().toLocaleString()}</small></div>
-</div>`).join("");
-
-document.getElementById("activeFobCount").innerText=400-residents.filter(r=>r.status==="Disabled").length;
-document.getElementById("hoursStatus").innerText=formatTime(accessStart)+" - "+formatTime(accessEnd);
-document.getElementById("dashHours").innerText=formatTime(accessStart).replace(":00","")+"-"+formatTime(accessEnd).replace(":00","");
-document.getElementById("shutdownStatus").innerText=emergencyShutdown?"ON":"OFF";
-document.getElementById("shutdownStatus").style.color=emergencyShutdown?"#ef4444":"#16a34a";
-document.getElementById("systemStatus").innerText=emergencyShutdown?"Shutdown":"Online";
-document.getElementById("overrideStatus").innerText=overrideEnabled?"Until "+formatTime(overrideEnd):"OFF";
-
-let a=document.getElementById("shutdownAlertText");
-if(a)a.innerText=emergencyShutdown?"All fobs are currently disabled.":"System is currently active.";
-
-let b=document.getElementById("shutdownBtn");
-if(b)b.innerText=emergencyShutdown?"Enable All Fobs":"Disable All Fobs";
-
-let c=document.getElementById("shutdownSettingText");
-if(c)c.innerText=emergencyShutdown?"Emergency shutdown is ON. All fobs are disabled.":"System active. All approved fobs currently work.";
-
-let d=document.getElementById("shutdownSettingBtn");
-if(d)d.innerText=emergencyShutdown?"Enable All Fobs":"Disable All Fobs";
+alert("Override activated.");
 }
 
 function addResident(){
 let name=document.getElementById("name").value;
-let apt=document.getElementById("apt").value;
+let unit=document.getElementById("unit").value;
 let phone=document.getElementById("phone").value;
-let fob=document.getElementById("fob").value;
+let cred=document.getElementById("fob").value;
 
-if(!name||!apt||!fob){
+if(!name||!unit||!cred){
 return alert("Enter name, unit, and fob ID.");
 }
 
-residents.unshift({name,apt,phone,fob,status:"Active",last:"Just added"});
-logs.unshift(`✅ ${name} • Unit ${apt} • New resident/fob assigned • ${fob}`);
+residents.unshift({
+name:name,
+unit:unit,
+phone:phone,
+cred:cred,
+status:"Active",
+last:"Just added"
+});
+
+logs.unshift(
+`✅ ${name} • Unit ${unit} • New resident credential assigned • ${cred}`
+);
+
+document.getElementById("name").value="";
+document.getElementById("unit").value="";
+document.getElementById("phone").value="";
+document.getElementById("fob").value="";
+
 render();
 }
 
-function disableFob(i){
+function assignCredential(){
+let name=document.getElementById("credName").value.trim();
+let unit=document.getElementById("credUnit").value.trim();
+let cred=document.getElementById("credId").value.trim();
+let act=document.getElementById("credAction").value;
+
+if(!name||!unit||!cred){
+return alert("Enter name, unit, and credential ID.");
+}
+
+let r=residents.find(x=>
+x.name.toLowerCase()===name.toLowerCase() || x.unit===unit
+);
+
+if(r){
+let old=r.cred;
+r.cred=cred;
+r.status="Active";
+r.last="Just assigned";
+
+logs.unshift(
+act==="replace"
+? `🔁 ${name} • Unit ${unit} • ${old} replaced with ${cred}`
+: `🔑 ${name} • Unit ${unit} • Credential assigned • ${cred}`
+);
+}else{
+residents.unshift({
+name:name,
+unit:unit,
+phone:"",
+cred:cred,
+status:"Active",
+last:"Just assigned"
+});
+
+logs.unshift(
+`✅ ${name} • Unit ${unit} • Created and assigned • ${cred}`
+);
+}
+
+document.getElementById("credName").value="";
+document.getElementById("credUnit").value="";
+document.getElementById("credId").value="";
+
+render();
+}
+
+function disable(i){
 residents[i].status="Disabled";
 residents[i].last="Just disabled";
-logs.unshift(`🚫 ${residents[i].name} • Unit ${residents[i].apt} • Fob Disabled • ${residents[i].fob}`);
+
+logs.unshift(
+`🚫 ${residents[i].name} • Unit ${residents[i].unit} • Credential disabled`
+);
+
 render();
 }
 
-function enableFob(i){
+function enable(i){
 residents[i].status="Active";
 residents[i].last="Just enabled";
-logs.unshift(`🟢 ${residents[i].name} • Unit ${residents[i].apt} • Fob Enabled • ${residents[i].fob}`);
+
+logs.unshift(
+`🟢 ${residents[i].name} • Unit ${residents[i].unit} • Credential enabled`
+);
+
 render();
+}
+function render(list=residents){
+
+let rows=`
+<tr>
+<th>Name</th>
+<th>Unit</th>
+<th>Phone</th>
+<th>Credential</th>
+<th>Status</th>
+<th>Last Used</th>
+<th>Action</th>
+</tr>`;
+
+list.forEach((r,i)=>{
+
+rows+=`
+<tr>
+<td>${r.name}</td>
+<td>${r.unit}</td>
+<td>${r.phone}</td>
+<td>${r.cred}</td>
+
+<td>
+<span class="status ${r.status==="Active"?"active":"disabled"}">
+${r.status}
+</span>
+</td>
+
+<td>${r.last}</td>
+
+<td>
+<button class="enable" onclick="enable(${i})">
+Enable
+</button>
+
+<button class="disable" onclick="disable(${i})">
+Disable
+</button>
+</td>
+
+</tr>`;
+
+});
+
+["mainTable","residentTable","credentialTable"].forEach(id=>{
+
+const el=document.getElementById(id);
+
+if(el){
+el.innerHTML=rows;
+}
+
+});
+
+document.getElementById("logsBox").innerHTML=
+logs.slice(0,4).map(x=>`
+
+<div class="activity">
+
+<div class="activityIcon">
+${x[0]}
+</div>
+
+<div>
+<b>${x}</b>
+<br>
+<small>Just Updated</small>
+</div>
+
+</div>
+
+`).join("");
+
+document.getElementById("fullLogs").innerHTML=
+
+logs.map(x=>`
+
+<div class="activity">
+
+<div class="activityIcon">
+${x[0]}
+</div>
+
+<div>
+<b>${x}</b>
+<br>
+<small>${new Date().toLocaleString()}</small>
+</div>
+
+</div>
+
+`).join("");
+
+document.getElementById("activeCount").innerText=
+400-residents.filter(r=>r.status==="Disabled").length;
+
+document.getElementById("hoursStatus").innerText=
+fmt(accessStart)+" - "+fmt(accessEnd);
+
+document.getElementById("doorHours").innerText=
+fmt(accessStart)+" - "+fmt(accessEnd);
+
+document.getElementById("dashHours").innerText=
+fmt(accessStart).replace(":00","")+"-"+fmt(accessEnd).replace(":00","");
+
+document.getElementById("shutdownStatus").innerText=
+emergency?"ON":"OFF";
+
+document.getElementById("shutdownStatus").style.color=
+emergency?"#ef4444":"#16a34a";
+
+document.getElementById("shutdownText").innerText=
+emergency
+?"Emergency shutdown is ON. Credentials are disabled."
+:"System active. Credentials currently work.";
+
+document.getElementById("shutdownBtn").innerText=
+emergency
+?"Enable All Credentials"
+:"Disable All Credentials";
+
+document.getElementById("overrideStatus").innerText=
+override
+?"Until "+fmt(overrideEnd)
+:"OFF";
+
+document.getElementById("unlockCount").innerText=
+remoteUnlocks;
+
 }
 
 function filterResidents(){
-let q=document.getElementById("search").value.toLowerCase();
-render(residents.filter(r=>
-r.name.toLowerCase().includes(q)||
-r.apt.toLowerCase().includes(q)||
-r.phone.toLowerCase().includes(q)||
-r.fob.toLowerCase().includes(q)
-));
+
+let q=document
+.getElementById("search")
+.value
+.toLowerCase();
+
+render(
+
+residents.filter(r=>
+
+r.name.toLowerCase().includes(q) ||
+
+r.unit.toLowerCase().includes(q) ||
+
+r.phone.toLowerCase().includes(q) ||
+
+r.cred.toLowerCase().includes(q)
+
+)
+
+);
+
 }
 
-function exportResidents(){
-let csv="Name,Unit,Phone,Fob ID,Status,Last Used\n"+
-residents.map(r=>`${r.name},${r.apt},${r.phone},${r.fob},${r.status},${r.last}`).join("\n");
+function exportCSV(){
 
-let blob=new Blob([csv],{type:"text/csv"});
+let csv=
+"Name,Unit,Phone,Credential,Status,Last Used\n"+
+
+residents.map(r=>
+
+`${r.name},${r.unit},${r.phone},${r.cred},${r.status},${r.last}`
+
+).join("\n");
+
+let blob=new Blob([csv],{
+type:"text/csv"
+});
+
 let a=document.createElement("a");
+
 a.href=URL.createObjectURL(blob);
-a.download="accesspilot-hoa-fobs.csv";
+
+a.download="accesspilot-export.csv";
+
 a.click();
+
 }
 
 render();
+
 </script>
+
 </body>
 </html>
-
-
 
